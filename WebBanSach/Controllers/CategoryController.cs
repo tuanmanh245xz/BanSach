@@ -24,7 +24,11 @@ namespace WebBanSach.Controllers
         [ValidateAntiForgeryToken] //trong gia mao
         public IActionResult Create(Category category)
         {
-            if(ModelState.IsValid)
+            if(category.Name == category.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("Name", "The DisplayOrder cannot exactly match the Name.");
+            }
+            if (ModelState.IsValid)
             {
                 _db.Categories.Add(category); //add 
                 _db.SaveChanges();//tu dong them
