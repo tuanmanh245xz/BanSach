@@ -17,4 +17,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WebBanSach.DataAccess\WebBanSach.DataAccess.csproj" />
+    <ProjectReference Include="..\WebBanSach.Model\WebBanSach.Model.csproj" />
+  </ItemGroup>
+
 </Project>

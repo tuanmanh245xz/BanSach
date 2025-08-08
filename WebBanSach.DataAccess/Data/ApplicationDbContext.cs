@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebBanSach.Models;
 
-namespace WebBanSach.Data
+using WebBanSach.Model;
+
+namespace WebBanSach.DataAccess
 {
     public class ApplicationDbContext: DbContext
     {

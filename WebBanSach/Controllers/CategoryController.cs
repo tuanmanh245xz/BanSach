@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebBanSach.Data;
-using WebBanSach.Models;
-
+using WebBanSach.DataAccess;
+using WebBanSach.Model;
 namespace WebBanSach.Controllers
 {
     public class CategoryController : Controller
