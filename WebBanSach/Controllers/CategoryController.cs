@@ -58,7 +58,7 @@ namespace WebBanSach.Controllers
         {
           
            
-                _db.Categories.Remove(category); //add 
+                _db.Categories.Update(category); //add 
                 _db.SaveChanges();//tu dong them
                 TempData["success"] = "Edit successfully"; //thong bao thanh cong
                 return RedirectToAction("Index");
