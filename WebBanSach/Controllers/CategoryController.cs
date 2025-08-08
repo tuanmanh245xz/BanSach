@@ -32,7 +32,7 @@ namespace WebBanSach.Controllers
             {
                 _db.Categories.Add(category); //add 
                 _db.SaveChanges();//tu dong them
-
+                TempData["success"] = "Category created successfully"; //thong bao thanh cong
                 return RedirectToAction("Index");
             }
                 return View(category);
@@ -61,7 +61,7 @@ namespace WebBanSach.Controllers
            
                 _db.Categories.Remove(category); //add 
                 _db.SaveChanges();//tu dong them
-
+                TempData["success"] = "Edit successfully"; //thong bao thanh cong
                 return RedirectToAction("Index");
             
             
@@ -95,6 +95,7 @@ namespace WebBanSach.Controllers
             {
                 _db.Categories.Remove(category); //add 
                 _db.SaveChanges();//tu dong them
+                TempData["success"] = "Delete successfully"; //thong bao thanh cong
                 return RedirectToAction("Index");
             }
           
