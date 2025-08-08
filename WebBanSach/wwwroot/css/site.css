@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -12,7 +12,27 @@ html {
   position: relative;
   min-height: 100%;
 }
-
+html, body {
+    height: 100%;
+}
 body {
   margin-bottom: 60px;
 }
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* Đẩy footer xuống dưới */
+}
+main {
+    min-height: calc(100vh - 150px); /* 150px = chiều cao header + footer */
+}
+/*.main_table{
+    position:relative
+}
+footer {
+    position:absolute;
+    top:100%;
+}*/
