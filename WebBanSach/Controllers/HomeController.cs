@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using WebBanSach.Models;
+using WebBanSach.Model;
 
 namespace WebBanSach.Controllers
 {

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using WebBanSach.Data;
+using WebBanSach.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
