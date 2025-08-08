@@ -4,15 +4,16 @@
         <label class="form-label mt-4">Create Category</label>
         <div asp-validation-summary=All></div>
         <div class="form-floating mb-3" bis_skin_checked="1">
-            <label asp-for="Name">Category Name</label>
             <input asp-for="Name" type="text" class="form-control" id="floatingInput" placeholder="nhap category name">
+            <label asp-for="Name">Category Name</label>
             <span asp-validation-for="Name" class="text-danger"></span>
             
            
         </div>
         <div class="form-floating mb-3" bis_skin_checked="1">
-            <label asp-for="DisplayOrder">Order</label>
+           
             <input asp-for="DisplayOrder" type="number" class="form-control" id="floatingPassword" placeholder="nhap Display Order" autocomplete="off">
+            <label asp-for="DisplayOrder">Order</label>
             <span asp-validation-for="DisplayOrder" class="text-danger"></span>
            
             
