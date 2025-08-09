@@ -11,6 +11,7 @@ namespace WebBanSach.DataAccess.Repository.IRepository
         ICategoryRepository Category { get; }//
         //Thuoc tinh de lay ra CategoryRepository
         //IProductRepository Product { get; } //Neu co them ProductRepository va chi can goi la duoc
+        ICoverTypeRepository CoverType { get; } //Thuoc tinh de lay ra CoverTypeRepository
         void Save(); //Luu thay doi
     }
 }

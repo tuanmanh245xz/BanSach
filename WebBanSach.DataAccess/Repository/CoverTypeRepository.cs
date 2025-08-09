@@ -1,26 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebBanSach.DataAccess.Repository.IRepository;
+using WebBanSach.Model;
 
 namespace WebBanSach.DataAccess.Repository
 {
-    public class UnitOfWork : IUnitOfWork
+    public class CoverTypeRepository : Repository<CoverType>, ICoverTypeRepository
     {
         private readonly ApplicationDbContext _db;
-
-        public UnitOfWork(ApplicationDbContext db)
+        public CoverTypeRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
-            Category = new CategoryRepository(_db);
         }
-        public ICategoryRepository Category { get; private set; }
-
-        public ICoverTypeRepository CoverType { get; private set; }
-
+        public void Update(CoverType coverType)
+        {
+            _db.CoverTypes.Update(coverType);
+        }
         public void Save()
         {
             _db.SaveChanges();
