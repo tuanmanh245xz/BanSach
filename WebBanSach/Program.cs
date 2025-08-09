@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WebBanSach.DataAccess;
 using WebBanSach.DataAccess.Repository;
 using WebBanSach.DataAccess.Repository.IRepository;
@@ -32,9 +32,20 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+// 1) Route chung cho tất cả Areas
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
+// 2) Đặt Area mặc định là Customer cho root "/"
+app.MapAreaControllerRoute(
+    name: "customer_default",
+    areaName: "Customer",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// (tuỳ chọn) Route MVC không‑area nếu bạn còn controller ngoài Areas
 app.MapControllerRoute(
     name: "default",
-    pattern: "{areas=Customer}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
