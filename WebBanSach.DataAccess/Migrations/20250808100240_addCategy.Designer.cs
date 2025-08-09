@@ -9,11 +9,11 @@ using WebBanSach.DataAccess;
 
 #nullable disable
 
-namespace WebBanSach.Migrations
+namespace WebBanSach.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250807095529_AddCategoryToDb")]
-    partial class AddCategoryToDb
+    [Migration("20250808100240_addCategy")]
+    partial class addCategy
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace WebBanSach.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("WebBanSach.Models.Category", b =>
+            modelBuilder.Entity("WebBanSach.Model.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebBanSach.DataAccess;
+using WebBanSach.DataAccess.Repository;
+using WebBanSach.DataAccess.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,7 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();//cau hinh thay dbcontext bang repository
 var app = builder.Build();
 
 
