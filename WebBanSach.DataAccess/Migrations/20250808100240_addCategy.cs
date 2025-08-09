@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace WebBanSach.Migrations
+namespace WebBanSach.DataAccess.Migrations
 {
-    public partial class AddCategoryToDb : Migration
+    public partial class addCategy : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

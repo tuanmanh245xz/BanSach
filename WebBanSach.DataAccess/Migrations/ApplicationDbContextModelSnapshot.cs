@@ -8,7 +8,7 @@ using WebBanSach.DataAccess;
 
 #nullable disable
 
-namespace WebBanSach.Migrations
+namespace WebBanSach.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace WebBanSach.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("WebBanSach.Models.Category", b =>
+            modelBuilder.Entity("WebBanSach.Model.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

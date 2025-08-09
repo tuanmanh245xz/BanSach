@@ -1,18 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebBanSach.DataAccess;
+using WebBanSach.DataAccess.Repository.IRepository;
 using WebBanSach.Model;
 namespace WebBanSach.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db)
+        private readonly IUnitOfWork _uniWork;
+        public CategoryController(IUnitOfWork db)
         {
-            _db = db;
+            _uniWork = db;
         }
         public IActionResult Index()
         {
-            IEnumerable<Category> categories = _db.Categories.ToList();
+            IEnumerable<Category> categories = _uniWork.Category.GetAll();
+            return View(categories);
             return View(categories);
         }
         public IActionResult Create()
@@ -29,8 +31,8 @@ namespace WebBanSach.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(category); //add 
-                _db.SaveChanges();//tu dong them
+                _uniWork.Category.Add(category); //add 
+                _uniWork.Save();//tu dong them
                 TempData["success"] = "Category created successfully"; //thong bao thanh cong
                 return RedirectToAction("Index");
             }
@@ -43,7 +45,7 @@ namespace WebBanSach.Controllers
             {
                 return NotFound();
             }
-            var category = _db.Categories.Find(id);//tim phan tu theo id
+            var category = _uniWork.Category.GetFirstOrDefault(u => u.Id == id);//tim phan tu theo id
             //var category = _db.Categories.FirstOrDefault(u => u.Id == id); tim phan tu dau tien
             //var category = _db.Categories.SingleDefault(u => u.Id == id); tu tim phan tu duy nhat
             if (category == null)
@@ -56,10 +58,10 @@ namespace WebBanSach.Controllers
         [ValidateAntiForgeryToken] //trong gia mao
         public IActionResult Edit(Category category )
         {
-          
-           
-                _db.Categories.Remove(category); //add 
-                _db.SaveChanges();//tu dong them
+
+
+            _uniWork.Category.Update(category); //add 
+            _uniWork.Save();//tu dong them
                 TempData["success"] = "Edit successfully"; //thong bao thanh cong
                 return RedirectToAction("Index");
             
@@ -72,7 +74,7 @@ namespace WebBanSach.Controllers
             {
                 return NotFound();
             }
-            var category = _db.Categories.Find(id);//tim phan tu theo id
+            var category = _uniWork.Category.GetFirstOrDefault(u => u.Id == id);//tim phan tu theo id
             //var category = _db.Categories.FirstOrDefault(u => u.Id == id); tim phan tu dau tien
             //var category = _db.Categories.SingleDefault(u => u.Id == id); tu tim phan tu duy nhat
             if (category == null)
@@ -92,8 +94,8 @@ namespace WebBanSach.Controllers
             }
             else
             {
-                _db.Categories.Remove(category); //add 
-                _db.SaveChanges();//tu dong them
+                _uniWork.Category.Remove(category); //add 
+                _uniWork.Save();//tu dong them
                 TempData["success"] = "Delete successfully"; //thong bao thanh cong
                 return RedirectToAction("Index");
             }
