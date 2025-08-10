@@ -32,11 +32,10 @@ namespace WebBanSach.DataAccess.Repository
                 objFromDb.Price50 = product.Price50;
                 objFromDb.Price100 = product.Price100;
                 objFromDb.CategoryId = product.CategoryId;
-                objFromDb.CoverType = product.CoverType;
-                if (product.ImageUrl != null)
-                {
+                objFromDb.CoverTypeId = product.CoverTypeId;
+                // chỉ cập nhật ImageUrl nếu controller truyền lên giá trị (khi có upload)
+                if (!string.IsNullOrWhiteSpace(product.ImageUrl))
                     objFromDb.ImageUrl = product.ImageUrl;
-                }
 
             }
             // Save changes to the database

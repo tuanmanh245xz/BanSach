@@ -43,40 +43,26 @@
         </div>
         <div class="mb-3">
             <label asp-for=product.ImageUrl></label>
-            <input type="file" id="ImageUrl" asp-for=product.ImageUrl class="form-control" />
+            @* <input type="file" id="ImageUrl" asp-for=product.ImageUrl class="form-control" /> *@
+            <input type="file" id="ImageUrl" name="file" asp-for=product.ImageUrl class="form-control" accept="image/*" />
             <span asp-validation-for=product.ImageUrl class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for=product.CategoryId></label>
-            <select name="product.CategoryId" class="form-control">
-                @foreach (var item in Model.CategoryList)
-                {
-                    var selected = item.Value == Model.product.CategoryId.ToString() ? "selected" : "";
-                    <option value="@item.Value" selected="@selected">@item.Text</option>
-                }
+            <select asp-for="product.CategoryId"
+                    asp-items="Model.CategoryList" class="form-control">
+                <option value="">-- Select category --</option>
             </select>
             <span asp-validation-for=product.CategoryId class="text-danger"></span>
         </div>
-        @* <div class="mb-3">
-            <label asp-for=coverType></label>
-            <select asp-for="coverType" class="form-control">
-                @foreach (var item in (IEnumerable<SelectListItem>)ViewData["CoverTypeList"])
-                {
-                    <option value="@item.Value">@item.Text</option>
-                }
-            </select>
-            <span asp-validation-for=CategoryId class="text-danger"></span>
-        </div> *@
+        
         <div class="mb-3">
-            <label asp-for=product.coverType></label>
-            <select name="product.coverType" class="form-control">
-                @foreach (var item in Model.CoverTypeList)
-                {
-                    var selected = item.Value == Model.product.CoverType.ToString() ? "selected" : "";
-                    <option value="@item.Value" selected="@selected">@item.Text</option>
-                }
+            <label asp-for=product.CoverTypeId></label>
+            <select asp-for="product.CoverTypeId"
+                    asp-items="Model.CoverTypeList" class="form-control">
+                <option value="">-- Select cover type --</option>
             </select>
-            <span asp-validation-for=product.coverType class="text-danger"></span>
+            <span asp-validation-for=product.CoverTypeId class="text-danger"></span>
         </div>
       
         @if(Model.product.Id == 0)
