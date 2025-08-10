@@ -12,8 +12,8 @@ using WebBanSach.DataAccess;
 namespace WebBanSach.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250809111253_AddProducttoDB")]
-    partial class AddProducttoDB
+    [Migration("20250810085101_AddToDb")]
+    partial class AddToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,7 +78,7 @@ namespace WebBanSach.DataAccess.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CoverType")
+                    b.Property<int>("CoverTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -102,14 +102,11 @@ namespace WebBanSach.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("coverTypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("coverTypeId");
+                    b.HasIndex("CoverTypeId");
 
                     b.ToTable("Products");
                 });
@@ -124,7 +121,7 @@ namespace WebBanSach.DataAccess.Migrations
 
                     b.HasOne("WebBanSach.Model.CoverType", "coverType")
                         .WithMany()
-                        .HasForeignKey("coverTypeId")
+                        .HasForeignKey("CoverTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
