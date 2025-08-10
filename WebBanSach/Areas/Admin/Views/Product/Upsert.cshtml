@@ -2,10 +2,10 @@
 @model ProductVM
 
 
-<form method="post" asp-action="Upsert">
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2>Upsert Product</h2>
+            <h2>@(Model.product.Id == 0 ? "Create": "Edit") Product</h2>
             <hr />
         </div>
         <div class="mb-3">
@@ -42,6 +42,11 @@
             <span asp-validation-for=product.Price100 class="text-danger"></span>
         </div>
         <div class="mb-3">
+            <label asp-for=product.ImageUrl></label>
+            <input type="file" id="ImageUrl" asp-for=product.ImageUrl class="form-control" />
+            <span asp-validation-for=product.ImageUrl class="text-danger"></span>
+        </div>
+        <div class="mb-3">
             <label asp-for=product.CategoryId></label>
             <select name="product.CategoryId" class="form-control">
                 @foreach (var item in Model.CategoryList)
@@ -74,9 +79,15 @@
             <span asp-validation-for=product.coverType class="text-danger"></span>
         </div>
       
-
-
-        <button type="submit" class="btn btn-primary">Update</button>
+        @if(Model.product.Id == 0)
+        {
+            <button type="submit" onclick="return ValidateInput()" class="btn btn-primary">Create</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">Update</button>
+        }
+        
         <a asp-controller="CoverType" asp-action="Index" class="btn btn-primary">Back To List</a>
     </div>
 
@@ -84,4 +95,19 @@
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        function ValidateInput() {
+            if(document.getElementById("ImageUrl").value == "") {
+                          Swal.fire({
+                                  icon: "error",
+                                  title: "Oops...",
+                                  text: "Something went wrong!",
+                                  footer: '<a href="#">Why do I have this issue?</a>'
+                                });
+                                return false;
+            }
+            return true;
+         
+        }
+    </script>
 }

@@ -78,20 +78,33 @@ namespace WebBanSach.Areas.Admin.Controllers
         }
 
         // post
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Edit(Product obj)
+        //{           
+        //    if (ModelState.IsValid)
+        //    {
+        //        _unitOfWork.Product.Update(obj);
+        //        _unitOfWork.Save();
+        //        TempData["Sucess"] = "Product Update Sucessfully";
+        //        return RedirectToAction("index");
+        //    }
+        //    return View(obj);
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Product obj)
-        {           
+        public IActionResult Upsert(ProductVM vm, IFormFile formFile)
+        {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Update(obj);
+                _unitOfWork.Product.Update(vm.product);
+               
                 _unitOfWork.Save();
-                TempData["Sucess"] = "Product Update Sucessfully";
+                TempData["Sucess"] = "Product Create/Update Sucessfully";
                 return RedirectToAction("index");
             }
-            return View(obj);
+            return View(vm);
         }
-
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
