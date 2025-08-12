@@ -18,14 +18,29 @@ namespace WebBanSach.DataAccess.Repository
             _db = db;
             this.Dbset = _db.Set<T>();
         }
-        public IEnumerable<T> GetAll()
+        //includePr: include properties to be included in the query, e.g. "Category,CoverType"
+        public IEnumerable<T> GetAll(string? includePr = null)
         {
             IQueryable<T> query = Dbset;
+            if (includePr != null)
+            {
+                foreach (var includeProperty in includePr.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
             return query.ToList();
         }
-        public T GetFirstOrDefault(System.Linq.Expressions.Expression<Func<T, bool>> filter)
+        public T GetFirstOrDefault(System.Linq.Expressions.Expression<Func<T, bool>> filter, string? includePr = null)
         {
             IQueryable<T> query = Dbset;
+            if (includePr != null)
+            {
+                foreach (var includeProperty in includePr.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
             query = query.Where(filter);
             return query.FirstOrDefault();
         }
