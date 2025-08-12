@@ -20,7 +20,7 @@ namespace WebBanSach.Model
         [Required]
         public decimal ISBN { get; set; }
         [Required]
-        public int Author { get; set; }
+        public string Author { get; set; }
         [Required]
         [Range(0, 1000000, ErrorMessage = "Price must be between 0 and 1000000")]
         public double Price50 { get; set; }
@@ -37,7 +37,7 @@ namespace WebBanSach.Model
         public int CoverTypeId { get; set; }   // <— đúng tên
         [ValidateNever]
         [ForeignKey("CoverTypeId")]
-        public CoverType coverType { get; set; }
+        public CoverType CoverType { get; set; }
 
     }
 }

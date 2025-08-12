@@ -164,6 +164,45 @@ namespace WebBanSach.Areas.Admin.Controllers
             }
             return View(obj);
         }
+        #region Api
+        // API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var productList = _unitOfWork.Product.GetAll(includePr: "Category,CoverType");
+            return Json(new { data = productList });
+        }
+        // post
+        [HttpDelete]
+        public IActionResult DeletePostApi(int? id)
+        {
+            var obj = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id);
 
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                if (obj.ImageUrl != null)
+                {
+                    string wwwRootPath = _webHostEnvironment.WebRootPath;
+                    var oldImagePath = Path.Combine(wwwRootPath, obj.ImageUrl.TrimStart('\\'));
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
+                _unitOfWork.Product.Remove(obj);
+                _unitOfWork.Save();
+
+                return Json(new { success = true, message = "Delete Successful" });
+            }
+
+
+            return View(obj);
+        }
+        #endregion
     }
 }

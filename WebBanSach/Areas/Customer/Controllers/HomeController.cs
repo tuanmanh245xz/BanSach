@@ -23,22 +23,23 @@ namespace WebBanSach.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-           
-            return View();
+            IEnumerable < Product > ProductList= _unitOfWork.Product.GetAll(includePr:"Category,CoverType");
+            return View(ProductList);
         }
+
+        public IActionResult Details(int productId)
+        {
+
+            ShoppingCart cartObj = new()
+            {
+                product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == productId, includePr: "Category,CoverType"),
+               
+            };
+
+            return View(cartObj);
+        }
+      
 
       
-        
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

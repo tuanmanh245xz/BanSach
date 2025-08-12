@@ -9,8 +9,8 @@ namespace WebBanSach.DataAccess.Repository.IRepository
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        T GetFirstOrDefault(Expression<Func<T,bool>> filter);
+        IEnumerable<T> GetAll(string? includePr = null);
+        T GetFirstOrDefault(Expression<Func<T,bool>> filter, string? includePr= null);
         void Add(T entity);
         void Update(T entity);
         void Remove(T entity);
